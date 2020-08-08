@@ -1,5 +1,8 @@
+BIN=docker-entrypoint.sh
+INSTALL_PATH=/usr/local/bin/
+
 install:
-	cp docker-init.sh /usr/local/bin/
+	cp ${BIN} ${INSTALL_PATH}
 
 uninstall:
-	rm /usr/local/bin/docker-init.sh
+	rm ${INSTALL_PATH}/${BIN}

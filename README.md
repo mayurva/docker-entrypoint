@@ -1,6 +1,6 @@
-# docker-init
+# docker-entrypoint
 
-docker-init is a simple script that sets up a Unix user inside a docker container environment with specified user name, id, and login shell.
+docker-entrypoint is a simple script that sets up a Unix user inside a docker container environment with specified user name, id, and login shell.
 
 You can override the docker entrypoint in `docker run` command with this script and have the container run the given command as your user id
 
@@ -8,14 +8,14 @@ You can override the docker entrypoint in `docker run` command with this script 
 1. clone this repository
 
 ```
-git clone git@github.com:mayurva/docker-init.git
-cd docker-init
+git clone git@github.com:mayurva/docker-entrypoint.git
+cd docker-entrypoint
 ```
 
 2. Run the following docker run command.
 
 ```
-docker run -it -v $HOME:$HOME -v $PWD/docker-init.sh:/docker-init.sh:ro --entrypoint=/docker-init.sh -e RUN_USER=$USER -e RUN_UID=$(id -u) -e RUN_SHELL=$SHELL -w $PWD python whoami && id -u && pwd && ls -al
+docker run -it -v $HOME:$HOME -v $PWD/docker-entrypoint.sh:/docker-entrypoint.sh:ro --entrypoint=/docker-entrypoint.sh -e RUN_USER=$USER -e RUN_UID=$(id -u) -e RUN_SHELL=$SHELL -w $PWD python whoami && id -u && pwd && ls -al
 ```
 
 This command should successfully display user name, uid, current working directory, and list of all the files in that directory.
@@ -33,7 +33,7 @@ Note that the make target will try to install the script in `/usr/local/bin`. Yo
 2. Create an alias for easy invocation of docker run command
 
 ```
-alias dritpsh='docker run -it -v $HOME:$HOME -v $(which docker-init.sh):/docker-init.sh:ro --entrypoint=/docker-init.sh -e RUN_USER=$USER -e RUN_UID=$(id -u) -e RUN_SHELL=$SHELL -w $PWD'
+alias dritpsh='docker run -it -v $HOME:$HOME -v $(which docker-entrypoint.sh):/docker-entrypoint.sh:ro --entrypoint=/docker-entrypoint.sh -e RUN_USER=$USER -e RUN_UID=$(id -u) -e RUN_SHELL=$SHELL -w $PWD'
 ```
 
 Add this alias to your `~/.bashrc` or `~/.profile` file to make it permanently available.
